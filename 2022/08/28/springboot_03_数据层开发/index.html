@@ -6,11 +6,15 @@
   
   <title>Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
+  <meta name="description" content="03_数据层开发（数据库准备工作）第一步：在配置文件中配置连接池连接数据库： 1234567spring:  datasource:    druid:      driver-class-name: com.mysql.cj.jdbc.Driver      url: jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;jll?serverTimezone&#x3D;UTC      username">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/index.html">
+<meta property="og:url" content="http://example.com/2022/08/28/springboot_03_%E6%95%B0%E6%8D%AE%E5%B1%82%E5%BC%80%E5%8F%91/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="03_数据层开发（数据库准备工作）第一步：在配置文件中配置连接池连接数据库： 1234567spring:  datasource:    druid:      driver-class-name: com.mysql.cj.jdbc.Driver      url: jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;jll?serverTimezone&#x3D;UTC      username">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-08-28T05:27:27.089Z">
+<meta property="article:modified_time" content="2022-08-25T13:42:08.996Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -69,9 +73,7 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-springboot_03_数据层开发" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-springboot_03_数据层开发" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2022/08/28/springboot_03_%E6%95%B0%E6%8D%AE%E5%B1%82%E5%BC%80%E5%8F%91/" class="article-date">
   <time class="dt-published" datetime="2022-08-28T05:27:27.089Z" itemprop="datePublished">2022-08-28</time>
@@ -125,105 +127,19 @@
     </footer>
   </div>
   
-</article>
-
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-springboot_02_实体类开发" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/08/28/springboot_02_%E5%AE%9E%E4%BD%93%E7%B1%BB%E5%BC%80%E5%8F%91/" class="article-date">
-  <time class="dt-published" datetime="2022-08-28T05:27:27.087Z" itemprop="datePublished">2022-08-28</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="02-实体类开发"><a href="#02-实体类开发" class="headerlink" title="02_实体类开发"></a>02_实体类开发</h1><h2 id="第一步："><a href="#第一步：" class="headerlink" title="第一步："></a>第一步：</h2><p>创建实体类包及实体类：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public class Book &#123;</span><br><span class="line">    private Integer id;</span><br><span class="line">    private String type;</span><br><span class="line">    private String name;</span><br><span class="line">    private String description;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  
+    <a href="/2022/08/28/springboot_02_%E5%AE%9E%E4%BD%93%E7%B1%BB%E5%BC%80%E5%8F%91/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
 
-
-
-<h2 id="第二步："><a href="#第二步：" class="headerlink" title="第二步："></a>第二步：</h2><p>实体类需要get和set方法，这里介绍一种注解lombok。里面个帮我们封装了实体类的get和set方法。</p>
-<p>现在pom.xml文件中导入lombok的依赖再刷新。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--lombok 依赖添加，简化实体类开发--&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;lombok&lt;/artifactId&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-
-<p>然后在实体类中添加注解</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@Get//该注解封装了实体类的get方法</span><br><span class="line">@Set//该注解封装了实体类的set方法</span><br></pre></td></tr></table></figure>
-
-<p>为了简便，lombok又在将Get和Set的注解有封装在@Data注解中。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//lombok注解</span><br><span class="line">@Data</span><br><span class="line">public class Book &#123;</span><br><span class="line">    private Integer id;</span><br><span class="line">    private String type;</span><br><span class="line">    private String name;</span><br><span class="line">    private String description;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>lombok的封装的构造方法并不在@Data中，而是另有注解：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@AllArgsConstructor//封装了所有的有参构造方法</span><br><span class="line">@NoArgsConstructor//无参构造，当然在实体类创建中就已经默认帮我们创建了无参构造方法。</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/08/28/springboot_02_%E5%AE%9E%E4%BD%93%E7%B1%BB%E5%BC%80%E5%8F%91/" data-id="cl7cwy4ww0001xcv25ut19cm8" data-title="" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-
-  
-    <article id="post-springboot_01_模板搭建" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/08/28/springboot_01_%E6%A8%A1%E6%9D%BF%E6%90%AD%E5%BB%BA/" class="article-date">
-  <time class="dt-published" datetime="2022-08-28T05:27:27.085Z" itemprop="datePublished">2022-08-28</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="01-项目模板搭建"><a href="#01-项目模板搭建" class="headerlink" title="01_项目模板搭建"></a>01_项目模板搭建</h1><h2 id="第一步："><a href="#第一步：" class="headerlink" title="第一步："></a>第一步：</h2><p>设置相关配置及名称：</p>
-<p>设置项目名称。</p>
-<p>类型选择Maven</p>
-<p>包类型选择Jar包</p>
-<p>版本根据自己的电脑安装的版本选择</p>
-<p>版本号v_0.0.1（根据自己的想法来）</p>
-<p>项目名称</p>
-<p>包路径设置等等</p>
-<h2 id="第二步："><a href="#第二步：" class="headerlink" title="第二步："></a>第二步：</h2><p>选择相关的框架依赖：</p>
-<p>Web：Spring Web</p>
-<p>SQL：Mysql Driver</p>
-<h2 id="第三步："><a href="#第三步：" class="headerlink" title="第三步："></a>第三步：</h2><p>模板创建后刷新Maven依赖；然后在pom.xml文件中添加mybatis和druid依赖。再刷新Maven。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--框架整合Mybatis-Plus--&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">          &lt;groupId&gt;com.baomidou&lt;/groupId&gt;</span><br><span class="line">          &lt;artifactId&gt;mybatis-plus-boot-starter&lt;/artifactId&gt;</span><br><span class="line">          &lt;version&gt;3.4.3.4&lt;/version&gt;</span><br><span class="line">      &lt;/dependency&gt;</span><br><span class="line">&lt;!--框架整合德鲁伊连接池--&gt;</span><br><span class="line">      &lt;dependency&gt;</span><br><span class="line">          &lt;groupId&gt;com.alibaba&lt;/groupId&gt;</span><br><span class="line">          &lt;artifactId&gt;druid-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">          &lt;version&gt;1.2.6&lt;/version&gt;</span><br><span class="line">      &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="第四步："><a href="#第四步：" class="headerlink" title="第四步："></a>第四步：</h2><p>将配置文件的格式该为yml格式并配置80端口（80端口在访问本地网址时不需要指定端口）</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sever：</span><br><span class="line">  port: 80</span><br></pre></td></tr></table></figure>
-
-<p>这样我们的项目模板就配置好了。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/08/28/springboot_01_%E6%A8%A1%E6%9D%BF%E6%90%AD%E5%BB%BA/" data-id="cl7cwy4wq0000xcv20fdqdluq" data-title="" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
 </section>
